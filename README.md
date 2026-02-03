@@ -18,8 +18,8 @@
     4. Create listings – Post a care request so nurses can view the listing and accept the offer or contact the customer.
 
 2. Provider (the user with the provider role):
-    1. Create/modify/remove provider profile - .
-    2. Create services - .
-    3. View customer statistics -  .
-    4. Reply to reviews - .
+    1. Create/modify/remove provider profile - .Register as provider and create an account.
+    2. Create services - . Create criteria on your profile and update your tags for the filter.
+    3. View customer statistics -  .View Customer Ratings and nursing history
+    4. Reply to reviews - .Reply to reviews on your profile 
 
