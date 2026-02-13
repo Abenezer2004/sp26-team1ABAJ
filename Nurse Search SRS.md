@@ -59,24 +59,42 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   ```
 
 ### 2.2 Provider Stories
-- **US‑PROV‑001 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑001 — <Register and Update Nursing History>**  
+  _Story:_ I want to update my Nursing History so that Customers can view it accurately
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Update Nursing History>
+    Given <I am a registered Nurse>
+    When  <I update my Nursing History>
+    Then  <Customers can view my Updated History>
   ```
 
-- **US‑PROV‑002 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑002 — <Sort Customer>**  
+  _Story:_   I want to sort Customers so that I can filter them to my preferences
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Sort Customers>
+    Given <I can view a customer list>
+    When  <I filter a list of customers>
+    Then  <The filters sort appriotely by what was selected>
+  ```
+- **US‑PROV‑003 — <Internship availability>>**  
+  _Story:_  I want to list if my practice is availible for internships
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Show availability>
+    Given <I have a nursinig page>
+    When  <I adjust my internship availability>
+    Then  <Users Viewing the page can see the availibilty>
+  ```
+  - **US‑PROV‑004 — <Hours of Operation>>**  
+  _Story:_   I want to be able to easily customize my available hours 
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Operational Hours>
+    Given <Customers can view my pracices ava>
+    When  <I input new hours on my page>
+    Then  <Customers are shown new hours of availibility>
   ```
 
 ### 2.3 SysAdmin Stories
@@ -105,13 +123,15 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 ## 3. Non‑Functional Requirements (make them measurable)
 - **Performance:** description 
 - **Availability/Reliability:** description
-- **Security/Privacy:** description
-- **Usability:** description
+- **Security/Privacy:** Hashedpasswords and role base user logins
+- **Usability:** New users can create an account within 2 minutes.
 
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- list any rules, policies, assumptions, etc.
+- May be issues with communication due to schedling difficulties,
+- Stable connections with popular browsers
+
 
 ---
 
