@@ -26,7 +26,7 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
 - **Provider ( Nurse:  )** — Discover jobs and accept or decline if it aligns with their skills and rate.
 
 **Scope (this semester).**
-- <Account creation and authentication for both customer and provider>
+- Account creation and authentication for both customer and provider
 - <Nurse profile creation with specialty, experience, and rate information>
 - <Search and filter functionality for customers to find nurses>
 - <Booking system>
