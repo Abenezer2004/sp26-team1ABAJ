@@ -82,7 +82,14 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     When I click on a nurse's profile
     Then I see their full profile
   ```
-
+  - **US‑PROV‑004 — <Hours of Operation>>**  
+  _Story:_   I want to be able to easily customize my available hours 
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Operational Hours>
+    Given <Customers can view my pracices ava>
+    When  <I input new hours on my page>
+    Then  <Customers are shown new hours of availibility>
 - **US‑CUST‑004 — <Request Appointment Booking>**  
   _Story:_  As a customer, I want to request an appointment with a nurse for a specific date and time, so that I can schedule the care I need.
   _Acceptance:_
@@ -160,36 +167,48 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
   ```
 
 ### 2.2 Provider Stories
-- **US‑PROV‑001 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑001 — <Register and Update Nursing History>**  
+  _Story:_ I want to update my Nursing History so that Customers can view it accurately
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Update Nursing History>
+    Given <I am a registered Nurse>
+    When  <I update my Nursing History>
+    Then  <Customers can view my Updated History>
   ```
 
-- **US‑PROV‑002 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑002 — <Sort Customer>**  
+  _Story:_   I want to sort Customers so that I can filter them to my preferences
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Sort Customers>
+    Given <I can view a customer list>
+    When  <I filter a list of customers>
+    Then  <The filters sort appriotely by what was selected>
   ```
-
-
+- **US‑PROV‑003 — <Internship availability>>**  
+  _Story:_  I want to list if my practice is availible for internships
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Show availability>
+    Given <I have a nursinig page>
+    When  <I adjust my internship availability>
+    Then  <Users Viewing the page can see the availibilty>
+  ```
+  
+  
+---
 
 ## 3. Non‑Functional Requirements (make them measurable)
 - **Performance:** Page load time should not exceed 5 seconds; the app should support multiple devices logged in at the same time.
 - **Availability/Reliability:** Platform should be available 95% of the time.
-- **Security/Privacy:** The app should be secure and encrypted.
-- **Usability:** The UI should be easy to use and similar to other apps so that elderly people can use it easily.
+- **Security/Privacy:** The app should be secure and encrypted, Hashedpasswords and role base user logins
+- **Usability:** The UI should be easy to use and similar to other apps so that elderly people can use it easily, New users can create an account within 2 minutes.
 ---
 
 ## 4. Assumptions, Constraints, and Policies
+- May be issues with communication due to schedling difficulties,
+- Stable connections with popular browsers
 - Assumptions- Nurses are licensed and certified; both the customer and provider provide accurate information.
 - Policies- Users must be 18 or above; nurses must accept booking within 48 hours; users can only review nurses after a booking is complete.
 - Constraints- We have only this semester to finish the app.
