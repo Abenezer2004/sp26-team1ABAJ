@@ -82,14 +82,7 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     When I click on a nurse's profile
     Then I see their full profile
   ```
-  - **US‑PROV‑004 — <Hours of Operation>>**  
-  _Story:_   I want to be able to easily customize my available hours 
-  _Acceptance:_
-  ```gherkin
-  Scenario: <Operational Hours>
-    Given <Customers can view my pracices ava>
-    When  <I input new hours on my page>
-    Then  <Customers are shown new hours of availibility>
+
 - **US‑CUST‑004 — <Request Appointment Booking>**  
   _Story:_  As a customer, I want to request an appointment with a nurse for a specific date and time, so that I can schedule the care I need.
   _Acceptance:_
@@ -195,7 +188,14 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     When  <I adjust my internship availability>
     Then  <Users Viewing the page can see the availibilty>
   ```
-  
+- **US‑PROV‑004 — <Hours of Operation>>**  
+  _Story:_   I want to be able to easily customize my available hours 
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Operational Hours>
+    Given <Customers can view my pracices ava>
+    When  <I input new hours on my page>
+    Then  <Customers are shown new hours of availibility>
   
 ---
 
