@@ -73,7 +73,7 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     Then I see a list of nurses matching my criteria
     And each result shows the nurse's name, specialty, experience, and rate
   ```
-  - **US‑CUST‑003 — <View Nurse profile>**  
+- **US‑CUST‑003 — <View Nurse profile>**  
   _Story:_ As a customer, I want to view detailed nurse profiles including qualifications, experience, ratings, and reviews, so that I can make an informed decision about which nurse to book.
   _Acceptance:_
   ```gherkin
@@ -96,7 +96,7 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     And I see a confirmation that my request was sent
     And the booking appears as "Pending" in my dashboard
   ```
-  - **US‑CUST‑005 — <View Booking Status>**  
+- **US‑CUST‑005 — <View Booking Status>**  
   _Story:_  As a customer, I want to view the status of my booking requests and confirmed appointments, so that I can track my scheduled care and pending requests.
   _Acceptance:_
   ```gherkin
@@ -129,7 +129,7 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
     And nurses can view and apply to my listing
     And I receive a confirmation
   ```
-  - **US‑CUST‑007 — <Rate and Review Nurse>**  
+- **US‑CUST‑007 — <Rate and Review Nurse>**  
   _Story:_ As a customer, I want to rate and review a nurse after a completed appointment, so that I can share my experience and help other customers make informed decisions.
   _Acceptance:_
   ```gherkin
