@@ -1,7 +1,7 @@
 
 # Requirements – Starter Template
 
-**Project Name:** Nurse serarch \
+**Project Name:** Nurse Search \
 **Team:** Abenezer Shiferaw and Allen Holthz\
 **Course:** CSC 340\
 **Version:** 1.0\
@@ -11,19 +11,19 @@
 
 ## 1. Overview
 **Vision.** One or two sentences: who this is for, the core problem, and the outcome.
-Nurse search will connect elderly and individuals/ patients requiring in-home care with qualifed nurses, making it easy to find the right caregiver for you and your needs. The customer can filter based on specialtity, experience,languge spoken and rate. And conferm and shedule a booking  
+Nurse Search will connect elderly individuals and patients requiring in-home care with qualified nurses, making it easy to find the right caregiver for you and your needs. The customer can filter based on specialty, experience, language spoken, and rate, and confirm and schedule a booking.
 
 **Glossary** Terms used in the project
-- **Term 1:** Customer:indiviual seaking a in home caregiver 
-- **Term 2:** provider: in home care giver/ nurse
-- **Term 3:** bookings: A scheduled appointment between customer and provider 
-- **Term 4:** Specialty: Specific area of nursing (wound care, rehabe. medication managment)
-- **Term 5:** Listings: A job posting by the customers with discribitin of the work.
+- **Term 1:** Customer: Individual seeking an in-home caregiver 
+- **Term 2:** Provider: In-home caregiver/nurse
+- **Term 3:** Bookings: A scheduled appointment between customer and provider
+- **Term 4:** Specialty: Specific area of nursing (wound care, rehab, medication management)
+- **Term 5:** Listings: A job posting by the customers with description of the work.
 
 
 **Primary Users / Roles.**
-- **Customer (Patient: )** —  Find and book nurses who match the requirments they need.
-- **Provider ( Nurse:  )** — Discover job and accept or decline if it alligns with their skills and rate.
+- **Customer (Patient: )** — Find and book nurses who match the requirements they need.
+- **Provider ( Nurse:  )** — Discover jobs and accept or decline if it aligns with their skills and rate.
 
 **Scope (this semester).**
 - <Account creation and authentication for both customer and provider>
@@ -45,11 +45,10 @@ Nurse search will connect elderly and individuals/ patients requiring in-home ca
 ---
 
 ## 2. Functional Requirements (User Stories)
-Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
 ### 2.1 Customer Stories
 - **US‑CUST‑001 — <Account creation and login>**  
-  _Story:_ As a customer, I want create and account and log in, so that so that I can access the app to search for nurse.  
+  _Story:_ As a customer, I want to create an account and log in, so that I can access the app to search for nurses. 
   _Acceptance:_
   ```gherkin
   Scenario: Customer successfully creates account
@@ -62,7 +61,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   ```
 
 - **US‑CUST‑002 — <Search and filter Nurse>**  
-  _Story:_ As a customer, I want search and filter nurses by specialty, experience level, etc, so that I can find a nurse who meets my specific care needs and budget.
+  _Story:_  As a customer, I want to search and filter nurses by specialty, experience level, etc., so that I can find a nurse who meets my specific care needs and budget.
   _Acceptance:_
   ```gherkin
   Scenario: Customer filters nurses by specialty and price range
@@ -75,7 +74,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     And each result shows the nurse's name, specialty, experience, and rate
   ```
   - **US‑CUST‑003 — <View Nurse profile>**  
-  _Story:_ As a customer, I want to view detailed nurse profiles including qualifications, experience, ratings, and reviews, so that I can make an informed decision about which nurse to book. 
+  _Story:_ As a customer, I want to view detailed nurse profiles including qualifications, experience, ratings, and reviews, so that I can make an informed decision about which nurse to book.
   _Acceptance:_
   ```gherkin
   Scenario: Customer views complete nurse profile
@@ -85,7 +84,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   ```
 
 - **US‑CUST‑004 — <Request Appointment Booking>**  
-  _Story:_ As a customer, I want to request an appointment with a nurse for a specific date and time, so that I can schedule the care I need.
+  _Story:_  As a customer, I want to request an appointment with a nurse for a specific date and time, so that I can schedule the care I need.
   _Acceptance:_
   ```gherkin
   Scenario: Customer requests a booking
@@ -98,7 +97,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     And the booking appears as "Pending" in my dashboard
   ```
   - **US‑CUST‑005 — <View Booking Status>**  
-  _Story:_ As a customer, I want to view the status of my booking requests and confirmed appointments, so that I can track my scheduled care and pending requests.
+  _Story:_  As a customer, I want to view the status of my booking requests and confirmed appointments, so that I can track my scheduled care and pending requests.
   _Acceptance:_
   ```gherkin
   Scenario: Customer checks booking status
@@ -184,16 +183,16 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 
 
 ## 3. Non‑Functional Requirements (make them measurable)
-- **Performance:** page load time should not exceed 5+ secounds, the app should support a lot device logged in at the same time 
-- **Availability/Reliability:** platform should be avalabele 95% of time
-- **Security/Privacy:** the app should be secure and encrypted 
-- **Usability:** the UI should be easy to use and similar to other apps so that elderly people can use it easly. 
+- **Performance:** Page load time should not exceed 5 seconds; the app should support multiple devices logged in at the same time.
+- **Availability/Reliability:** Platform should be available 95% of the time.
+- **Security/Privacy:** The app should be secure and encrypted.
+- **Usability:** The UI should be easy to use and similar to other apps so that elderly people can use it easily.
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- Assumptions -Nurses are licensed and certified, both the customer provide accurate information
-- Policies- users must be 18 or above, nurse must accept booking in 48 hours, users can only review nurse after a booking is complete.
-- Constraints- we have only this semister to finish the app
+- Assumptions- Nurses are licensed and certified; both the customer and provider provide accurate information.
+- Policies- Users must be 18 or above; nurses must accept booking within 48 hours; users can only review nurses after a booking is complete.
+- Constraints- We have only this semester to finish the app.
 ---
 
 ## 5. Milestones (course‑aligned)
