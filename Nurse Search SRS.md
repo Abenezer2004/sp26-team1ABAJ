@@ -52,77 +52,112 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   _Story:_ As a customer, I want create and account and log in, so that so that I can access the app to search for nurse.  
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer successfully creates account
+    Given I am on the registration page
+    When I enter my name, email, phone number, and password
+    And I submit the registration form
+    Then my account is created
+    And I am logged in to the platform
+    And I am redirected to the customer dashboard
   ```
 
 - **US‑CUST‑002 — <Search and filter Nurse>**  
   _Story:_ As a customer, I want search and filter nurses by specialty, experience level, etc, so that I can find a nurse who meets my specific care needs and budget.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer filters nurses by specialty and price range
+    Given I am logged in as a customer
+    When I navigate to the nurse search page
+    And I select "Geriatric Care" as the specialty
+    And I set the price range to $25-$40 per hour
+    And I click "Search"
+    Then I see a list of nurses matching my criteria
+    And each result shows the nurse's name, specialty, experience, and rate
   ```
   - **US‑CUST‑003 — <View Nurse profile>**  
   _Story:_ As a customer, I want to view detailed nurse profiles including qualifications, experience, ratings, and reviews, so that I can make an informed decision about which nurse to book. 
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer views complete nurse profile
+    Given I am viewing search results for nurses
+    When I click on a nurse's profile
+    Then I see their full profile
   ```
 
 - **US‑CUST‑004 — <Request Appointment Booking>**  
   _Story:_ As a customer, I want to request an appointment with a nurse for a specific date and time, so that I can schedule the care I need.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer requests a booking
+    Given I am viewing a nurse's profile
+    When I select a date and time from their available slots
+    And I provide details about the care needed
+    And I submit the booking request
+    Then the nurse receives a notification of my request
+    And I see a confirmation that my request was sent
+    And the booking appears as "Pending" in my dashboard
   ```
   - **US‑CUST‑005 — <View Booking Status>**  
   _Story:_ As a customer, I want to view the status of my booking requests and confirmed appointments, so that I can track my scheduled care and pending requests.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer checks booking status
+    Given I am logged in as a customer
+    When I navigate to "My Bookings"
+    Then I see all my bookings organized by status:
+      | Pending requests |
+      | Confirmed appointments |
+      | Completed appointments |
+      | Declined requests |
+    And each booking shows the nurse name, date, time, and current status
   ```
 
 - **US‑CUST‑006 — <Create Job Listing>**  
   _Story:_  As a customer, I want to create a job listing describing my care needs, so that nurses can find and apply to opportunities that match their skills.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer creates a job listing
+    Given I am logged in as a customer
+    When I navigate to "Post a Job"
+    And I enter the required care details:
+      | specialty needed |
+      | start date |
+      | duration of care |
+      | hourly budget |
+      | additional requirements |
+    And I submit the listing
+    Then my listing is published
+    And nurses can view and apply to my listing
+    And I receive a confirmation
   ```
   - **US‑CUST‑007 — <Rate and Review Nurse>**  
   _Story:_ As a customer, I want to rate and review a nurse after a completed appointment, so that I can share my experience and help other customers make informed decisions.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer submits a review after appointment
+    Given I have a completed appointment with a nurse
+    When I navigate to my completed bookings
+    And I select "Write Review" for that appointment
+    And I provide a rating from 1-5 stars
+    And I write a text review
+    And I submit the review
+    Then the review is published on the nurse's profile
+    And the nurse's average rating is updated
   ```
 
 - **US‑CUST‑008 — <Cancel Appointment>**  
   _Story:_  As a customer, I want to cancel a confirmed appointment, so that I can adjust my schedule when plans change.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Customer cancels an upcoming appointment
+    Given I have a confirmed appointment
+    When I navigate to "My Bookings"
+    And I select the appointment to cancel
+    And I click "Cancel Appointment"
+    And I confirm the cancellation
+    Then the appointment status changes to "Cancelled"
+    And the nurse receives a cancellation notification
+    And the time slot becomes available again in the nurse's calendar
   ```
 
 ### 2.2 Provider Stories
@@ -149,17 +184,16 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 
 
 ## 3. Non‑Functional Requirements (make them measurable)
-- **Performance:** description 
-- **Availability/Reliability:** description
-- **Security/Privacy:** description
-- **Usability:** description
-
+- **Performance:** page load time should not exceed 5+ secounds, the app should support a lot device logged in at the same time 
+- **Availability/Reliability:** platform should be avalabele 95% of time
+- **Security/Privacy:** the app should be secure and encrypted 
+- **Usability:** the UI should be easy to use and similar to other apps so that elderly people can use it easly. 
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- list any rules, policies, assumptions, etc.
-- Assumptioons -Nurses are licensed and certified, both the customer provide accurate information
-- Policies- users must be 18 or above, nurse must accept booking in 48 hours, users can only review nurse after a booking is complete
+- Assumptions -Nurses are licensed and certified, both the customer provide accurate information
+- Policies- users must be 18 or above, nurse must accept booking in 48 hours, users can only review nurse after a booking is complete.
+- Constraints- we have only this semister to finish the app
 ---
 
 ## 5. Milestones (course‑aligned)
