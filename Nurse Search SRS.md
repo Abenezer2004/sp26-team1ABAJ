@@ -27,18 +27,18 @@ Nurse Search will connect elderly individuals and patients requiring in-home car
 
 **Scope (this semester).**
 - Account creation and authentication for both customer and provider
-- <Nurse profile creation with specialty, experience, and rate information>
-- <Search and filter functionality for customers to find nurses>
-- <Booking system>
-- <Appointment acceptance or decline> 
-- <Calendar view showing upcoming appointments>
-- <Customer creating listing >
-- <Rating and review system> 
+- Nurse profile creation with specialty, experience, and rate information
+- Search and filter functionality for customers to find nurses
+- Booking system
+- Appointment acceptance or decline
+- Calendar view showing upcoming appointments
+- Customer creating listing 
+- Rating and review system
 
 **Out of scope (deferred).**
-- <Payment processing and transaction handling>
-- <Background check verification system>
-- <Real-time chat between customers and nurses>
+- Payment processing and transaction handling
+- Background check verification system.
+- Real-time chat between customers and nurses.
 
 > This document is **requirements‑level** and solution‑neutral; design decisions (UI layouts, API endpoints, schemas) are documented separately.
 
