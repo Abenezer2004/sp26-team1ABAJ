@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings - Nurse Search</title>
+  <link rel="stylesheet" href="../common/css/styles.css">
+  <style>
+    .tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--gray-200);
+      margin-bottom: 24px;
+    }
+    .tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--gray-600);
+      transition: all 0.2s ease;
+    }
+    .tab.active {
+      color: var(--primary-blue);
+      border-bottom-color: var(--primary-blue);
+    }
+    .tab:hover {
+      color: var(--primary-blue);
+    }
+    .booking-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      border: 1px solid var(--gray-200);
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+    .booking-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .booking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .booking-nurse {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        <div class="logo-icon">N+</div>
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Nurses</a></li>
+        <li><a href="booking-dashboard.html" class="active">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin: 32px auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+      <h1>My Bookings</h1>
+      <a href="create-listing.html" class="btn btn-primary">+ Create Job Listing</a>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('upcoming')">Upcoming (2)</button>
+      <button class="tab" onclick="showTab('pending')">Pending (1)</button>
+      <button class="tab" onclick="showTab('completed')">Completed (5)</button>
+      <button class="tab" onclick="showTab('cancelled')">Cancelled</button>
+    </div>
+
+    <!-- Upcoming Bookings Tab -->
+    <div id="upcoming-tab" class="tab-content active">
+      <!-- Booking 1 -->
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-nurse">
+            <div class="nurse-avatar">SJ</div>
+            <div>
+              <h3 style="margin-bottom: 4px;">Sarah Johnson</h3>
+              <p style="color: var(--gray-600); margin: 0; font-size: 14px;">Geriatric Care Specialist</p>
+            </div>
+          </div>
+          <span class="badge badge-success">Confirmed</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: var(--gray-100); border-radius: var(--radius-md); margin-bottom: 16px;">
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Date & Time</div>
+            <div style="font-weight: 600;">Feb 18, 2026 • 10:00 AM</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Duration</div>
+            <div style="font-weight: 600;">4 hours</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Total Cost</div>
+            <div style="font-weight: 600; color: var(--primary-blue);">$140</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Care Details</div>
+          <p style="margin: 0;">Alzheimer's care for my mother. Assistance with daily activities and medication management.</p>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary btn-small">Contact Nurse</button>
+          <button class="btn btn-secondary btn-small" onclick="cancelBooking()">Cancel Booking</button>
+          <button class="btn btn-primary btn-small">View Details</button>
+        </div>
+      </div>
+
+      <!-- Booking 2 -->
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-nurse">
+            <div class="nurse-avatar">MC</div>
+            <div>
+              <h3 style="margin-bottom: 4px;">Michael Chen</h3>
+              <p style="color: var(--gray-600); margin: 0; font-size: 14px;">Wound Care & Rehabilitation</p>
+            </div>
+          </div>
+          <span class="badge badge-success">Confirmed</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: var(--gray-100); border-radius: var(--radius-md); margin-bottom: 16px;">
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Date & Time</div>
+            <div style="font-weight: 600;">Feb 20, 2026 • 2:00 PM</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Duration</div>
+            <div style="font-weight: 600;">2 hours</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Total Cost</div>
+            <div style="font-weight: 600; color: var(--primary-blue);">$84</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Care Details</div>
+          <p style="margin: 0;">Post-surgery wound care and mobility exercises.</p>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary btn-small">Contact Nurse</button>
+          <button class="btn btn-secondary btn-small" onclick="cancelBooking()">Cancel Booking</button>
+          <button class="btn btn-primary btn-small">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Bookings Tab -->
+    <div id="pending-tab" class="tab-content">
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-nurse">
+            <div class="nurse-avatar">ER</div>
+            <div>
+              <h3 style="margin-bottom: 4px;">Emily Rodriguez</h3>
+              <p style="color: var(--gray-600); margin: 0; font-size: 14px;">Medication Management</p>
+            </div>
+          </div>
+          <span class="badge badge-warning">Pending Response</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: var(--gray-100); border-radius: var(--radius-md); margin-bottom: 16px;">
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Requested Date & Time</div>
+            <div style="font-weight: 600;">Feb 22, 2026 • 9:00 AM</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Duration</div>
+            <div style="font-weight: 600;">3 hours</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Estimated Cost</div>
+            <div style="font-weight: 600; color: var(--primary-blue);">$90</div>
+          </div>
+        </div>
+
+        <div style="padding: 12px; background: rgba(245, 166, 35, 0.1); border-left: 3px solid var(--accent-orange); border-radius: var(--radius-sm); margin-bottom: 16px;">
+          <p style="margin: 0; color: var(--gray-700); font-size: 14px;"> Waiting for nurse to accept. Average response time: 2 hours</p>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary btn-small" onclick="cancelRequest()">Cancel Request</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completed Bookings Tab -->
+    <div id="completed-tab" class="tab-content">
+      <!-- Completed Booking 1 -->
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-nurse">
+            <div class="nurse-avatar">SJ</div>
+            <div>
+              <h3 style="margin-bottom: 4px;">Sarah Johnson</h3>
+              <p style="color: var(--gray-600); margin: 0; font-size: 14px;">Geriatric Care Specialist</p>
+            </div>
+          </div>
+          <div>
+            <span class="badge badge-info">Completed</span>
+            <div class="rating" style="margin-top: 8px;">
+              <div class="stars" style="font-size: 14px;">
+                5/5
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: var(--gray-100); border-radius: var(--radius-md); margin-bottom: 16px;">
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Completed On</div>
+            <div style="font-weight: 600;">Feb 10, 2026</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Duration</div>
+            <div style="font-weight: 600;">4 hours</div>
+          </div>
+          <div>
+            <div style="color: var(--gray-600); font-size: 14px; margin-bottom: 4px;">Total Paid</div>
+            <div style="font-weight: 600; color: var(--accent-green);">$140</div>
+          </div>
+        </div>
+
+        <div style="padding: 12px; background: rgba(5, 118, 66, 0.1); border-left: 3px solid var(--accent-green); border-radius: var(--radius-sm); margin-bottom: 16px;">
+          <p style="margin: 0; color: var(--gray-700); font-size: 14px;"> You rated this appointment 5 stars</p>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-primary btn-small" onclick="bookAgain('Sarah Johnson')">Book Again</button>
+          <button class="btn btn-secondary btn-small">View Details</button>
+        </div>
+      </div>
+
+      <!-- Show message if no more completed bookings -->
+      <div style="text-align: center; padding: 32px; color: var(--gray-500);">
+        <p>+ 4 more completed appointments</p>
+      </div>
+    </div>
+
+    <!-- Cancelled Bookings Tab -->
+    <div id="cancelled-tab" class="tab-content">
+      <div class="empty-state">
+        <div class="empty-state-icon"></div>
+        <h3>No Cancelled Bookings</h3>
+        <p>You haven't cancelled any appointments yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show selected tab
+      document.getElementById(tabName + '-tab').classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function cancelBooking() {
+      if (confirm('Are you sure you want to cancel this booking?')) {
+        alert('Booking cancelled. The nurse has been notified.');
+      }
+    }
+
+    function cancelRequest() {
+      if (confirm('Are you sure you want to cancel this request?')) {
+        alert('Request cancelled.');
+      }
+    }
+
+    function bookAgain(nurseName) {
+      alert('Redirecting to ' + nurseName + "'s profile to book again...");
+      window.location.href = 'nurse-profile.html';
+    }
+  </script>
+</body>
+</html>

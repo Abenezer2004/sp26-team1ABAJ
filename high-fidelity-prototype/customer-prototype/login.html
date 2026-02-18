@@ -23,9 +23,51 @@
         </div>
     </nav>
 
-    
+  <!-- Login Form -->
+  <div class="container" style="max-width: 450px; margin-top: 80px; margin-bottom: 48px;">
+    <div class="card">
+      <h1 class="text-center">Welcome Back</h1>
+      <p class="text-center" style="color: var(--gray-600); margin-bottom: 32px;">Log in to access your account</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+        </div>
 
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
 
+        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;">
+            <input type="checkbox">
+            <span style="font-weight: normal;">Remember me</span>
+          </label>
+          <a href="#" style="font-size: 14px;">Forgot password?</a>
+        </div>
 
+        <button type="submit" class="btn btn-primary btn-full btn-large">Log In</button>
+      </form>
 
+      <div style="text-align: center; margin: 24px 0; color: var(--gray-400);">
+        <span>─────  or  ─────</span>
+      </div>
+
+      <p class="text-center" style="color: var(--gray-600);">
+        Don't have an account? <a href="signup.html" style="font-weight: 600;">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Simulate login
+      alert('Login successful!');
+      window.location.href = 'dashboard.html';
+    });
+  </script>
 </body>
+</html>

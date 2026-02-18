@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarah Johnson - Nurse Profile</title>
+  <link rel="stylesheet" href="../common/css/styles.css">
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 24px;
+      margin: 32px 0;
+    }
+    @media (max-width: 968px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .review-card {
+      background: var(--gray-100);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        <div class="logo-icon">N+</div>
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Nurses</a></li>
+        <li><a href="booking-dashboard.html">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="search.html" style="display: inline-flex; align-items: center; gap: 8px; margin: 24px 0; color: var(--gray-600);">
+       Back to Search
+    </a>
+
+    <div class="profile-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Profile Header -->
+        <div class="card">
+          <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
+            <div class="nurse-avatar" style="width: 100px; height: 100px; font-size: 40px;">SJ</div>
+            <div style="flex: 1;">
+              <h1 style="margin-bottom: 8px;">Sarah Johnson</h1>
+              <p style="font-size: 18px; color: var(--gray-600); margin-bottom: 16px;">Geriatric Care Specialist</p>
+              <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="rating">
+                  <span style="font-weight: 600;">4.9 (127 reviews)</span>
+                </div>
+                <span class="badge badge-success"> Verified</span>
+                <span class="badge badge-info">Available</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; padding: 24px; background: var(--gray-100); border-radius: var(--radius-md);">
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">8 years</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Experience</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">350+</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Appointments</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">98%</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Response Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="card">
+          <h2>About Sarah</h2>
+          <p>I am a dedicated geriatric care nurse with over 8 years of experience providing compassionate in-home care for elderly patients. I specialize in Alzheimer's and dementia care, medication management, and mobility assistance.</p>
+          <p>My goal is to help seniors maintain their independence and quality of life in the comfort of their own homes. I believe in treating every patient with dignity and respect, and I work closely with families to ensure the best possible care.</p>
+        </div>
+
+        <!-- Specialties & Skills -->
+        <div class="card">
+          <h2>Specialties & Skills</h2>
+          <div class="nurse-tags">
+            <span class="tag">Geriatric Care</span>
+            <span class="tag">Alzheimer's Care</span>
+            <span class="tag">Dementia Care</span>
+            <span class="tag">Medication Management</span>
+            <span class="tag">Mobility Assistance</span>
+            <span class="tag">Personal Care</span>
+            <span class="tag">Vital Signs Monitoring</span>
+            <span class="tag">Fall Prevention</span>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="card">
+          <h2>Languages</h2>
+          <div style="display: flex; gap: 12px;">
+            <span class="badge badge-info">English (Native)</span>
+            <span class="badge badge-info">Spanish (Fluent)</span>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="card">
+          <h2>Certifications & Education</h2>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="font-weight: 600;">Registered Nurse (RN)</div>
+              <div style="color: var(--gray-600); font-size: 14px;">State Board of Nursing • License #123456</div>
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="font-weight: 600;">Certified Dementia Care Practitioner</div>
+              <div style="color: var(--gray-600); font-size: 14px;">National Council of Certified Dementia Practitioners</div>
+            </li>
+            <li style="padding: 12px 0;">
+              <div style="font-weight: 600;">Bachelor of Science in Nursing</div>
+              <div style="color: var(--gray-600); font-size: 14px;">University of North Carolina at Greensboro</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="card">
+          <h2>Patient Reviews (127)</h2>
+          
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <div style="font-weight: 600;">Margaret T.</div>
+                <div class="rating">
+                  <div class="stars" style="font-size: 14px;">
+                    5/5
+                  </div>
+                </div>
+              </div>
+              <div style="color: var(--gray-500); font-size: 14px;">2 weeks ago</div>
+            </div>
+            <p style="margin: 0; color: var(--gray-700);">Sarah has been caring for my mother for the past 6 months. She is incredibly patient, professional, and genuinely cares about her patients. My mother looks forward to her visits!</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <div style="font-weight: 600;">Robert K.</div>
+                <div class="rating">
+                  <div class="stars" style="font-size: 14px;">
+                    5/5
+                  </div>
+                </div>
+              </div>
+              <div style="color: var(--gray-500); font-size: 14px;">1 month ago</div>
+            </div>
+            <p style="margin: 0; color: var(--gray-700);">Excellent nurse! Very knowledgeable about dementia care. She helped us develop a routine that has made a huge difference for my father.</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div>
+                <div style="font-weight: 600;">Linda M.</div>
+                <div class="rating">
+                  <div class="stars" style="font-size: 14px;">
+                   5/5
+                  </div>
+                </div>
+              </div>
+              <div style="color: var(--gray-500); font-size: 14px;">2 months ago</div>
+            </div>
+            <p style="margin: 0; color: var(--gray-700);">Sarah is wonderful! She communicates clearly in both English and Spanish, which has been so helpful for our family. Highly recommend!</p>
+          </div>
+
+          <button class="btn btn-secondary btn-full">View All Reviews</button>
+        </div>
+      </main>
+
+      <!-- Sidebar -->
+      <aside>
+        <!-- Booking Card -->
+        <div class="card" style="position: sticky; top: 90px;">
+          <div class="nurse-rate" style="text-align: center; margin-bottom: 24px;">
+            $35/hour
+          </div>
+
+          <button class="btn btn-primary btn-full btn-large" onclick="openBookingModal()">
+            Book Appointment
+          </button>
+
+          <div style="margin: 24px 0; text-align: center; color: var(--gray-400);">
+            <span>─────  or  ─────</span>
+          </div>
+
+          <button class="btn btn-secondary btn-full">
+            Send Message
+          </button>
+
+          <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--gray-200);">
+            <h4 style="margin-bottom: 12px;">Quick Stats</h4>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--gray-600);">Response time:</span>
+                <span style="font-weight: 600;">Within 1 hour</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--gray-600);">Acceptance rate:</span>
+                <span style="font-weight: 600;">95%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--gray-600);">Joined:</span>
+                <span style="font-weight: 600;">Jan 2022</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Book Appointment with Sarah</h2>
+        <button class="modal-close" onclick="closeBookingModal()">×</button>
+      </div>
+      
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="appointmentDate">Preferred Date *</label>
+          <input type="date" id="appointmentDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="appointmentTime">Preferred Time *</label>
+          <select id="appointmentTime" required>
+            <option value="">Select a time</option>
+            <option>8:00 AM - 10:00 AM</option>
+            <option>10:00 AM - 12:00 PM</option>
+            <option>12:00 PM - 2:00 PM</option>
+            <option>2:00 PM - 4:00 PM</option>
+            <option>4:00 PM - 6:00 PM</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <select id="duration">
+            <option>2 hours</option>
+            <option>4 hours</option>
+            <option>6 hours</option>
+            <option>8 hours</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="careNeeds">Care Needs *</label>
+          <textarea id="careNeeds" required placeholder="Please describe the care requirements and any special needs..."></textarea>
+        </div>
+
+        <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span>Rate:</span>
+            <span style="font-weight: 600;">$35/hour</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span>Duration:</span>
+            <span style="font-weight: 600;">2 hours</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--gray-300); font-size: 18px; font-weight: 700; color: var(--primary-blue);">
+            <span>Estimated Total:</span>
+            <span>$70</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-large">Request Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.add('active');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('bookingModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeBookingModal();
+      }
+    });
+
+    // Handle booking form submission
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Booking request sent! Sarah will respond within 1 hour.');
+      closeBookingModal();
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>
