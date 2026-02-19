@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Job Listing - Nurse Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Nurses</a></li>
+        <li><a href="dashboard.html">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width: 800px; margin: 32px auto;">
+    <a href="booking-dashboard.html" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--gray-600);">
+      ← Back to Dashboard
+    </a>
+
+    <div class="card">
+      <h1>Create a Job Listing</h1>
+      <p style="color: var(--gray-600); margin-bottom: 32px;">Post your care needs and let qualified nurses apply to your listing.</p>
+
+      <form id="listingForm">
+        <div class="form-group">
+          <label for="jobTitle">Job Title *</label>
+          <input type="text" id="jobTitle" required placeholder="Post surgery care, dementia care, etc.">
+        </div>
+
+        <div class="form-group">
+          <label for="specialty">Required Specialty *</label>
+          <select id="specialty" required>
+            <option value="">Select specialty</option>
+            <option>Geriatric Care</option>
+            <option>Wound Care</option>
+            <option>Medication Management</option>
+            <option>Rehabilitation</option>
+            <option>Palliative Care</option>
+            <option>Dementia/Alzheimer's Care</option>
+            <option>Post-Surgery Care</option>
+            <option>General Home Care</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Job Description *</label>
+          <textarea id="description" required placeholder="Describe the care needed, daily tasks, and any special requirements   "></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="startDate">Start Date *</label>
+            <input type="date" id="startDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="duration">Duration of Care *</label>
+            <select id="duration" required>
+              <option value="">Select duration</option>
+              <option>1-2 weeks</option>
+              <option>1 month</option>
+              <option>2-3 months</option>
+              <option>Ongoing</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="hoursPerWeek">Hours Per Week *</label>
+            <input type="number" id="hoursPerWeek" required placeholder="e.g., 20" min="1" max="168">
+          </div>
+
+          <div class="form-group">
+            <label for="schedule">Preferred Schedule *</label>
+            <select id="schedule" required>
+              <option value="">Select schedule</option>
+              <option>Weekdays (Mon-Fri)</option>
+              <option>Weekends only</option>
+              <option>Flexible</option>
+              <option>Morning shifts</option>
+              <option>Afternoon shifts</option>
+              <option>Evening shifts</option>
+              <option>Overnight</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Hourly Budget *</label>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-weight: 600;">$</span>
+            <input type="number" id="budgetMin" placeholder="Min" min="20" max="100" style="flex: 1;">
+            <span style="color: var(--gray-600);">to</span>
+            <input type="number" id="budgetMax" placeholder="Max" min="20" max="100" style="flex: 1;">
+            <span style="font-weight: 600;">/hour</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location *</label>
+          <input type="text" id="location" required placeholder="Enter zip code or city">
+        </div>
+
+        <div class="form-group">
+          <label for="languages">Preferred Languages</label>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="english">
+              <span>English</span>
+            </label>
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="spanish">
+              <span>Spanish</span>
+            </label>
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="french">
+              <span>French</span>
+            </label>
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="amharic">
+              <span>Amharic</span>
+            </label>
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="mandarin">
+              <span>Mandarin</span>
+            </label>
+            <label class="checkbox-label" style="background: var(--gray-100); padding: 8px 16px; border-radius: var(--radius-full);">
+              <input type="checkbox" value="arabic">
+              <span>Arabic</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Minimum Experience Required</label>
+          <select id="experience">
+            <option value="">No preference</option>
+            <option>1+ years</option>
+            <option>3+ years</option>
+            <option>5+ years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additionalRequirements">Additional Requirements</label>
+          <textarea id="additionalRequirements" placeholder="Any other specific preferences "></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary btn-large">Publish Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
