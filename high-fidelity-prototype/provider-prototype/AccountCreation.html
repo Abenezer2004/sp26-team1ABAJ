@@ -1,45 +1,12 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Provider Account Setup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
 
-        h1 {
-            margin-top: 0;
-        }
-
-        form {
-            max-width: 500px;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        h2 {
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="AccountCreation.css">
 </head>
+
 <body>
 
     <nav>
@@ -47,60 +14,61 @@
         <a href="Account.html">Profile</a>
     </nav>
 
-    <h1>Provider Account Creation</h1>
+    <div class="container">
 
-    <form>
+        <h1>Provider Account Creation</h1>
 
-        <!-- Nursing History Section -->
-        <h2>Nursing History</h2>
+        <form>
 
-        <label for="license">Nursing License Number</label>
-        <input type="text" id="license" name="license">
+            <h2>Nursing History</h2>
 
-        <label for="experience">Years of Experience</label>
-        <input type="text" id="experience" name="experience">
+            <label for="license">Nursing License Number</label>
+            <input type="text" id="license" name="license">
 
-        <label for="history">Professional History</label>
-        <textarea id="history" name="history" rows="4"></textarea>
+            <label for="experience">Years of Experience</label>
+            <input type="text" id="experience" name="experience">
 
-        <!-- Internship Availability -->
-        <h2>Internship Availability</h2>
+            <label for="history">Professional History</label>
+            <textarea id="history" name="history" rows="4"></textarea>
 
-        <label for="internship">Are internships available?</label>
-        <select id="internship" name="internship">
-            <option value="">Select Option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
+            <h2>Internship Availability</h2>
 
-        <!-- Hours of Operation -->
-        <h2>Hours of Operation</h2>
+            <label for="internship">Are internships available?</label>
+            <select id="internship" name="internship">
+                <option value="">Select Option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
 
-        <label for="monday">Monday</label>
-        <input type="text" id="monday" name="monday" placeholder="e.g. 9AM - 5PM">
+            <h2>Hours of Operation</h2>
 
-        <label for="tuesday">Tuesday</label>
-        <input type="text" id="tuesday" name="tuesday" placeholder="e.g. 9AM - 5PM">
+            <label for="monday">Monday</label>
+            <input type="text" id="monday" name="monday">
 
-        <label for="wednesday">Wednesday</label>
-        <input type="text" id="wednesday" name="wednesday" placeholder="e.g. 9AM - 5PM">
+            <label for="tuesday">Tuesday</label>
+            <input type="text" id="tuesday" name="tuesday">
 
-        <label for="thursday">Thursday</label>
-        <input type="text" id="thursday" name="thursday" placeholder="e.g. 9AM - 5PM">
+            <label for="wednesday">Wednesday</label>
+            <input type="text" id="wednesday" name="wednesday">
 
-        <label for="friday">Friday</label>
-        <input type="text" id="friday" name="friday" placeholder="e.g. 9AM - 5PM">
+            <label for="thursday">Thursday</label>
+            <input type="text" id="thursday" name="thursday">
 
-        <label for="saturday">Saturday</label>
-        <input type="text" id="saturday" name="saturday" placeholder="Closed or hours">
+            <label for="friday">Friday</label>
+            <input type="text" id="friday" name="friday">
 
-        <label for="sunday">Sunday</label>
-        <input type="text" id="sunday" name="sunday" placeholder="Closed or hours">
+            <label for="saturday">Saturday</label>
+            <input type="text" id="saturday" name="saturday">
 
-        <br><br>
-        <button type="submit">Save Profile</button>
+            <label for="sunday">Sunday</label>
+            <input type="text" id="sunday" name="sunday">
 
-    </form>
+            <br><br>
+            <button type="submit">Save Profile</button>
+
+        </form>
+
+    </div>
 
 </body>
 </html>
