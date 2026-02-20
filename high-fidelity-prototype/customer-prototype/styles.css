@@ -520,8 +520,8 @@ textarea { min-height: 100px; resize: vertical; }
 .rating { display: flex; align-items: center; gap: 6px; }
 .stars  { color: #F4C542; font-size: 1rem; }
 button {
-    background-color: #3498db;
-    color: white;
+    color: #2980b9;
+    color: rgb(0, 0, 0);
     padding: 20px;
     border-radius: 10px;
 }

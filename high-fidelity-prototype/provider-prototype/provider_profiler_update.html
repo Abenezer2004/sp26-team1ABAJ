@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Provider Profile - Nurse Search</title>
+  <link rel="stylesheet" href="../customer-prototype/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-content">
+    <div class="logo">Nurse Search</div>
+    <ul class="nav-links">
+      <li><a href="Search.html">Search</a></li>
+    <li><a href="../customer-prototype/index.html">Home</a></li>
+      <li><a href="provider_profiler_update.html" class="active">Profile</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="max-width:900px; margin:32px auto;">
+<h1 style="margin-bottom:32px;">My Provider Profile</h1>
+
+<div style="display:grid; gap:24px;">
+
+<!-- Personal Info -->
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+    <h2 style="margin:0;">Personal Information</h2>
+    <button class="btn btn-secondary btn-small" onclick="toggleEdit('personal')">Edit</button>
+  </div>
+
+  <form id="personalForm">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" value="Sarah" disabled>
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" value="John" disabled>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" value="sarah.john@example.com" disabled>
+    </div>
+
+    <div id="personalButtons" style="display:none; gap:12px; margin-top:16px;">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" onclick="cancelEdit('personal')">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<!-- Search Matching Fields -->
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+    <h2 style="margin:0;">Professional Details</h2>
+    <button class="btn btn-secondary btn-small" onclick="toggleEdit('professional')">Edit</button>
+  </div>
+
+  <form id="professionalForm">
+
+    <!-- ZIP (matches search location) -->
+    <div class="form-group">
+      <label>Zip Code (Service Area)</label>
+      <input type="text" value="00000" disabled>
+    </div>
+
+    <!-- Experience (matches search experience ranges) -->
+    <div class="form-group">
+      <label>Years of Experience</label>
+      <input type="number" value="5" disabled>
+    </div>
+
+    <!-- Hourly Rate (matches slider filter) -->
+    <div class="form-group">
+      <label>Hourly Rate ($)</label>
+      <input type="number" value="35" disabled>
+    </div>
+
+    <!-- Specialties (MUST MATCH VALUE ATTRIBUTES) -->
+    <div class="form-group">
+      <label>Specialties</label>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="geriatric" checked disabled>
+          <span>Post Operation Care</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="wound" disabled>
+          <span>Wound Care</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="medication" checked disabled>
+          <span>Medication Management</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="rehab" disabled>
+          <span>Rehabilitation</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="palliative" disabled>
+          <span>Palliative Care</span>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- Languages (must match filter values exactly) -->
+    <div class="form-group">
+      <label>Languages Spoken</label>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="english" checked disabled>
+          <span>English</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="spanish" checked disabled>
+          <span>Spanish</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="french" disabled>
+          <span>French</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="mandarin" disabled>
+          <span>Mandarin</span>
+        </label>
+
+        <label class="checkbox-label" style="pointer-events:none;">
+          <input type="checkbox" value="amharic" disabled>
+          <span>Amharic</span>
+        </label>
+
+      </div>
+    </div>
+
+    <div id="professionalButtons" style="display:none; gap:12px; margin-top:16px;">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" onclick="cancelEdit('professional')">Cancel</button>
+    </div>
+
+  </form>
+</div>
+
+</div>
+</div>
+
+<script>
+function toggleEdit(section) {
+  const form = document.getElementById(section + 'Form');
+  const inputs = form.querySelectorAll('input');
+  const buttons = document.getElementById(section + 'Buttons');
+  const checkboxLabels = form.querySelectorAll('.checkbox-label');
+
+  inputs.forEach(input => input.disabled = !input.disabled);
+
+  checkboxLabels.forEach(label => {
+    label.style.pointerEvents =
+      label.style.pointerEvents === 'none' ? 'auto' : 'none';
+  });
+
+  buttons.style.display =
+    buttons.style.display === 'none' ? 'flex' : 'none';
+}
+
+function cancelEdit(section) {
+  toggleEdit(section);
+}
+</script>
+
+</body>
+</html>
