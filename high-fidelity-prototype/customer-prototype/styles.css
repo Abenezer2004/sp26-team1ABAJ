@@ -518,6 +518,7 @@ textarea { min-height: 100px; resize: vertical; }
 .mb-16 { margin-bottom: 16px; }
 
 .rating { display: flex; align-items: center; gap: 6px; }
+
 .stars  { color: #F4C542; font-size: 1rem; }
 button {
     color: #2980b9;
@@ -542,3 +543,4 @@ button-blue:hover {
     margin-bottom: 15px;
     border-radius: 10px;
 }
+
