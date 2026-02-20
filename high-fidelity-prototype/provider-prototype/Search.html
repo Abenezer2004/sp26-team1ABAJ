@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../customer-prototype/styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="../customer-prototype/index.html">Home</a></li>
+        <li><a href="Search.html">Find Customers</a></li>
+       
+        <li><a href="provider_profiler_update.html">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container">
+
+        <h1>Customer Search</h1>
+
+        <div class="filter-section">
+            <h2>Filter Customers</h2>
+
+            <label for="careType">Type of Care Needed</label>
+            <select id="careType">
+                <option value="">Select</option>
+                <option>Elderly Care</option>
+                <option>Pediatric Care</option>
+                <option>Post-Surgery Care</option>
+                <option>General Checkup</option>
+            </select>
+
+            <label for="availability">Availability Needed</label>
+            <select id="availability">
+                <option value="">Select</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+                <option>Weekend</option>
+            </select>
+
+            <label for="distance">Distance</label>
+            <select id="distance">
+                <option value="">Select</option>
+                <option>0 - 10 miles</option>
+                <option>10 - 30 miles</option>
+                <option>30+ miles</option>
+            </select>
+
+            <button type="button">Apply Filters</button>
+        </div>
+
+        <div class="customer-list">
+            <h2>Customer List</h2>
+
+            <div class="customer-card">
+                <strong>John Smith</strong><br>
+                Care Needed: Elderly Care<br>
+                Availability: Morning<br>
+                Location: 3 miles away
+            </div>
+
+            <div class="customer-card">
+                <strong>Sarah Johnson</strong><br>
+                Care Needed: Pediatric Care<br>
+                Availability: Afternoon<br>
+                Location: 8 miles away
+            </div>
+
+            <div class="customer-card">
+                <strong>Michael Davis</strong><br>
+                Care Needed: Post-Surgery Care<br>
+                Availability: Evening<br>
+                Location: 12 miles away
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

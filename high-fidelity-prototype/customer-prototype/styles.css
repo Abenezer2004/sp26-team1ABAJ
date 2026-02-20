@@ -518,4 +518,29 @@ textarea { min-height: 100px; resize: vertical; }
 .mb-16 { margin-bottom: 16px; }
 
 .rating { display: flex; align-items: center; gap: 6px; }
+
 .stars  { color: #F4C542; font-size: 1rem; }
+button {
+    color: #2980b9;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+button-blue:hover {
+    background-color: #2980b9;
+}
+.customer-list {
+    margin-top: 30px;
+    
+}
+
+.customer-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+

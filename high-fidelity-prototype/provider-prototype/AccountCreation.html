@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Provider Account Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../customer-prototype/styles.css">
+</head>
+
+<body>
+
+     <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="../customer-prototype/index.html">Home</a></li>
+        <li><a href="Search.html">Find Customers</a></li>
+        
+       
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container">
+
+        <h1>Provider Account Creation</h1>
+
+        <form>
+
+            <h2>Nursing History</h2>
+
+            <label for="license">Nursing License Number</label>
+            <input type="text" id="license" name="license">
+
+            <label for="experience">Years of Experience</label>
+            <input type="text" id="experience" name="experience">
+
+            <label for="history">Professional History</label>
+            <textarea id="history" name="history" rows="4"></textarea>
+
+            <h2>Internship Availability</h2>
+
+            <label for="internship">Are internships available?</label>
+            <select id="internship" name="internship">
+                <option value="">Select Option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Hours of Operation</h2>
+
+            <label for="monday">Monday</label>
+            <input type="text" id="monday" name="monday">
+
+            <label for="tuesday">Tuesday</label>
+            <input type="text" id="tuesday" name="tuesday">
+
+            <label for="wednesday">Wednesday</label>
+            <input type="text" id="wednesday" name="wednesday">
+
+            <label for="thursday">Thursday</label>
+            <input type="text" id="thursday" name="thursday">
+
+            <label for="friday">Friday</label>
+            <input type="text" id="friday" name="friday">
+
+            <label for="saturday">Saturday</label>
+            <input type="text" id="saturday" name="saturday">
+
+            <label for="sunday">Sunday</label>
+            <input type="text" id="sunday" name="sunday">
+
+           <button type="button" onclick="window.location.href='provider_profiler_update.html'">
+  Save Profile
+</button>
+
+
+        </form>
+
+    </div>
+
+</body>
+</html>
