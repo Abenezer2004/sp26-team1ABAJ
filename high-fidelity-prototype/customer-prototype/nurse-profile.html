@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Nurse Profile</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 24px;
+      margin: 32px 0;
+    }
+    @media (max-width: 968px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .review-card {
+      background: var(--gray-100);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Nurses</a></li>
+        <li><a href="dashboard.html">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="search.html" style="display: inline-flex; align-items: center; gap: 8px; margin: 24px 0; color: var(--gray-600);">
+       Back to Search
+    </a>
+
+    <div class="profile-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Profile Header -->
+        <div class="card">
+          <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
+            <div class="nurse-avatar" style="width: 100px; height: 100px; font-size: 40px;">SJ</div>
+            <div style="flex: 1;">
+              <h1 style="margin-bottom: 8px;">Sarah Johnson</h1>
+              <p style="font-size: 18px; color: var(--gray-600); margin-bottom: 16px;">post operations Care Specialist</p>
+              <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="rating">
+                  <span style="font-weight: 600;">5.0 (100 reviews)</span>
+                </div>
+                <span class="badge badge-success"> Verified</span>
+                <span class="badge badge-info">Available</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; padding: 24px; background: var(--gray-100); border-radius: var(--radius-md);">
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">5 years</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Experience</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">30+</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Appointments</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">100%</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Response Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="card">
+          <h2>About Sarah</h2>
+          <p> info about the nurse Sarah Johnson</p>
+        </div>
+
+        <!-- Specialties & Skills -->
+        <div class="card">
+          <h2>Specialties & Skills</h2>
+          <div class="nurse-tags">
+            <span class="tag">post operations Care</span>
+            <span class="tag">Alzheimer's Care</span>
+           
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="card">
+          <h2>Languages</h2>
+          <div style="display: flex; gap: 12px;">
+            <span class="badge badge-info">English (Native)</span>
+            <span class="badge badge-info">Spanish (Fluent)</span>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="card">
+          <h2>Certifications & Education</h2>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="font-weight: 600;">Registered Nurse (RN)</div>
+              <div style="color: var(--gray-600); font-size: 14px;">nurse ID</div>
+            </li>
+            
+            <li style="padding: 12px 0;">
+              <div style="font-weight: 600;">Bachelor of Science in Nursing</div>
+              <div style="color: var(--gray-600); font-size: 14px;">UNCG</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="card">
+          <h2>Patient Reviews (100)</h2>
+          <p style="color: var(--gray-600); margin-bottom: 16px;">Read what patients are saying about Sarah's care.</p>
+         
+          <button class="btn btn-secondary btn-full">View All Reviews</button>
+        </div>
+      </main>
+
+      <!-- Sidebar -->
+      <aside>
+        <!-- Booking Card -->
+        <div class="card" style="position: sticky; top: 90px;">
+          <div class="nurse-rate" style="text-align: center; margin-bottom: 24px;">
+            $35/hour
+          </div>
+
+          <button class="btn btn-primary btn-full btn-large" >
+            Book Appointment
+          </button>
+
+          <div style="margin: 24px 0; text-align: center; color: var(--gray-400);">
+            <span>─────  or  ─────</span>
+          </div>
+
+          <button class="btn btn-secondary btn-full">
+            Send Message
+          </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
