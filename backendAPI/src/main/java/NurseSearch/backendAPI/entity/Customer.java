@@ -23,10 +23,10 @@ public class Customer extends User {
     private String notes;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"customer", "appointments"})
+    @JsonIgnoreProperties("customer")
     private List<Listing> listings;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"customer", "listing", "reviews"})
+    @JsonIgnoreProperties("customer")
     private List<Appointment> appointments;
 }

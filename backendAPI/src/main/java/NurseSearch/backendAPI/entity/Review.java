@@ -5,39 +5,38 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "listings")
+@Table(name = "reviews")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Listing {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long listingId;
+    private Long reviewId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    @JsonIgnoreProperties({"listings", "appointments"})
-    private Customer customer;
+    @JoinColumn(name = "appointment_id", nullable = false)
+    @JsonIgnoreProperties("reviews")
+    private Appointment appointment;
 
-    @Column(nullable = false)
-    private String specialtyNeeded;
-
-    private String languageRequired;
-    private LocalDate startDate;
-    private Integer durationDays;
-    private Double hourlyBudget;
-
-    @Column(columnDefinition = "TEXT")
-    private String additionalRequirements;
-
+    // WHO wrote this review — "CUSTOMER" or "NURSE"
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private ListingStatus status;
+    private ReviewAuthor reviewedBy;
+
+    // rating is optional — null means they left a comment only
+    private Integer rating;
+
+    @Column(columnDefinition = "TEXT")
+    private String comment;
+
+    // nurse can reply to a customer review
+    @Column(columnDefinition = "TEXT")
+    private String replyText;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -49,7 +48,6 @@ public class Listing {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
-        if (status == null) status = ListingStatus.OPEN;
     }
 
     @PreUpdate
@@ -57,9 +55,8 @@ public class Listing {
         updatedAt = LocalDateTime.now();
     }
 
-    public enum ListingStatus {
-        OPEN,
-        FILLED,
-        CLOSED
+    public enum ReviewAuthor {
+        CUSTOMER,
+        NURSE
     }
 }

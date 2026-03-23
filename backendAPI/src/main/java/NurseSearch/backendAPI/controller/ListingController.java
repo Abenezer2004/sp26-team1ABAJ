@@ -17,14 +17,14 @@ public class ListingController {
     @Autowired
     private ListingService listingService;
 
-    // GET all listings
+    // GET /api/listings
     @GetMapping
     public ResponseEntity<List<Listing>> getAllListings() {
         List<Listing> listings = listingService.getAllListings();
         return new ResponseEntity<>(listings, HttpStatus.OK);
     }
 
-    // get listing by ID
+    // GET /api/listings/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Listing> getListingById(@PathVariable Long id) {
         Optional<Listing> listing = listingService.getListingById(id);
@@ -41,21 +41,21 @@ public class ListingController {
         return new ResponseEntity<>(listings, HttpStatus.OK);
     }
 
-    // get listings by customer ID
+    // GET /api/listings/customer/{customerId}
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<Listing>> getListingsByCustomer(@PathVariable Long customerId) {
         List<Listing> listings = listingService.getListingsByCustomerId(customerId);
         return new ResponseEntity<>(listings, HttpStatus.OK);
     }
 
-    // GET /api/listings/search?specialty=Wound Care — search listings by specialty 
+    // GET /api/listings/search?specialty=Wound Care
     @GetMapping("/search")
     public ResponseEntity<List<Listing>> searchListings(@RequestParam String specialty) {
         List<Listing> listings = listingService.getListingsBySpecialty(specialty);
         return new ResponseEntity<>(listings, HttpStatus.OK);
     }
 
-    //customer creates a listing
+    // POST /api/listings/customer/{customerId} — customer creates a listing (US-CUST-006)
     @PostMapping("/customer/{customerId}")
     public ResponseEntity<Listing> createListing(@PathVariable Long customerId,
                                                   @RequestBody Listing listing) {
@@ -83,6 +83,7 @@ public class ListingController {
         }
     }
 
+    // DELETE /api/listings/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteListing(@PathVariable Long id) {
         listingService.deleteListing(id);

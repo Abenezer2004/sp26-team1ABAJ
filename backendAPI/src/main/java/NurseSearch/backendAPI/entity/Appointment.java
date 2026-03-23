@@ -21,17 +21,17 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    @JsonIgnoreProperties({"appointments", "listings"})
+    @JsonIgnoreProperties("appointments")
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "nurse_id", nullable = false)
-    @JsonIgnoreProperties({"appointments", "reviews"})
+    @JsonIgnoreProperties("appointments")
     private Nurse nurse;
 
     @ManyToOne
     @JoinColumn(name = "listing_id")
-    @JsonIgnoreProperties({"customer", "appointments"})
+    @JsonIgnoreProperties("appointments")
     private Listing listing;
 
     private LocalDateTime dateTime;
@@ -43,9 +43,11 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
+    // Tracks revview
     private Boolean reviewedByCustomer = false;
     private Boolean reviewedByNurse = false;
 
+    // Reviews linked to this appointment 
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("appointment")
     private List<Review> reviews;

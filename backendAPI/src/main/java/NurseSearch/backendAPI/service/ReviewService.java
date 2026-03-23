@@ -26,12 +26,12 @@ public class ReviewService {
     @Autowired
     private NurseRepository nurseRepository;
 
-    // GET all reviews for a nurse's profile 
+    // GET all reviews for a nurse's profile (US-CUST-003)
     public List<Review> getReviewsForNurse(Long nurseId) {
         return reviewRepository.findByAppointment_Nurse_UserId(nurseId);
     }
 
-    // GET all reviews about a customer 
+    // GET all reviews about a customer (written by nurses)
     public List<Review> getReviewsForCustomer(Long customerId) {
         return reviewRepository.findByAppointment_Customer_UserId(customerId);
     }
@@ -46,16 +46,27 @@ public class ReviewService {
         return reviewRepository.findById(id);
     }
 
-    
+    /**
+     * POST - submit a review after a completed appointment (US-CUST-007)
+     *
+     * Rules enforced here:
+     * 1. Appointment must exist
+     * 2. Appointment must be COMPLETED
+     * 3. The submitterId must match the customer OR nurse on that appointment
+     * 4. That party has not already reviewed this appointment
+     * 5. rating is optional (pass null to leave comment only)
+     * 6. comment is optional (pass null to leave rating only)
+     * 7. If a rating is given, it updates the nurse's averageRating automatically
+     */
     public Review createReview(Long submitterId, Long appointmentId,
                                Integer rating, String comment) {
 
-        
+        // Validate rating range only if one was provided
         if (rating != null && (rating < 1 || rating > 5)) {
             throw new RuntimeException("Rating must be between 1 and 5");
         }
 
-        
+        // Must provide at least one of rating or comment
         if (rating == null && (comment == null || comment.isBlank())) {
             throw new RuntimeException("You must provide a rating, a comment, or both");
         }
@@ -63,12 +74,12 @@ public class ReviewService {
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
 
-        
+        // Rule 2 — must be completed
         if (appointment.getStatus() != AppointmentStatus.COMPLETED) {
             throw new RuntimeException("Can only review a completed appointment");
         }
 
-        
+        // Rule 3 — figure out who is submitting and verify they were in this appointment
         ReviewAuthor authorRole;
         Long customerIdOnAppt = appointment.getCustomer().getUserId();
         Long nurseIdOnAppt = appointment.getNurse().getUserId();
@@ -81,12 +92,12 @@ public class ReviewService {
             throw new RuntimeException("You were not part of this appointment and cannot review it");
         }
 
-        
+        // Rule 4 — each party can only review once per appointment
         if (reviewRepository.existsByAppointment_AppointmentIdAndReviewedBy(appointmentId, authorRole)) {
             throw new RuntimeException("You have already reviewed this appointment");
         }
 
-        
+        // Save the review
         Review review = new Review();
         review.setAppointment(appointment);
         review.setReviewedBy(authorRole);
@@ -94,7 +105,7 @@ public class ReviewService {
         review.setComment(comment);
         Review saved = reviewRepository.save(review);
 
-        
+        // Mark the appointment as reviewed by this party
         if (authorRole == ReviewAuthor.CUSTOMER) {
             appointment.setReviewedByCustomer(true);
         } else {
@@ -102,7 +113,7 @@ public class ReviewService {
         }
         appointmentRepository.save(appointment);
 
-        
+        // Rule 7 — if a rating was given, recalculate nurse's average
         if (rating != null) {
             recalculateNurseRating(nurseIdOnAppt);
         }
@@ -121,7 +132,7 @@ public class ReviewService {
         }).orElseThrow(() -> new RuntimeException("Review not found with id: " + reviewId));
     }
 
-    
+    // DELETE review — admin moderation
     public void deleteReview(Long id) {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
@@ -129,13 +140,13 @@ public class ReviewService {
         Long nurseId = review.getAppointment().getNurse().getUserId();
         reviewRepository.deleteById(id);
 
-        
+        // Recalculate after deletion in case a rated review was removed
         if (review.getRating() != null) {
             recalculateNurseRating(nurseId);
         }
     }
 
-    
+    // Helper — recalculates and saves nurse's averageRating and reviewCount
     private void recalculateNurseRating(Long nurseId) {
         List<Review> ratedReviews = reviewRepository.findByAppointment_Nurse_UserId(nurseId)
                 .stream()

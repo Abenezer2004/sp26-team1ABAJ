@@ -18,21 +18,21 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    // Get all customer reviews for a nurse profile (US-CUST-003)
+    // GET /api/reviews/nurse/{nurseId} — all customer reviews for a nurse profile (US-CUST-003)
     @GetMapping("/nurse/{nurseId}")
     public ResponseEntity<List<Review>> getReviewsForNurse(@PathVariable Long nurseId) {
         List<Review> reviews = reviewService.getReviewsForNurse(nurseId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
-    
-    // Get all nurse reviews about a customer
+
+    // GET /api/reviews/customer/{customerId} — all nurse reviews about a customer
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<Review>> getReviewsForCustomer(@PathVariable Long customerId) {
         List<Review> reviews = reviewService.getReviewsForCustomer(customerId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    // GET both reviews for one appointment
+    // GET /api/reviews/appointment/{appointmentId} — both reviews for one appointment
     @GetMapping("/appointment/{appointmentId}")
     public ResponseEntity<List<Review>> getReviewsByAppointment(@PathVariable Long appointmentId) {
         List<Review> reviews = reviewService.getReviewsByAppointment(appointmentId);
@@ -47,7 +47,7 @@ public class ReviewController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // POST customer submits a review for an appointment (US-CUST-003)
+    // POST /api/reviews — customer submits a review for an appointment (US-CUST-003)
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Map<String, Object> body) {
         try {
@@ -66,6 +66,7 @@ public class ReviewController {
     }
 
     // PUT /api/reviews/{id}/reply — nurse replies to a customer review
+    // Body: { "replyText": "Thank you for the kind words!" }
     @PutMapping("/{id}/reply")
     public ResponseEntity<Review> addReply(@PathVariable Long id,
                                             @RequestBody Map<String, String> body) {
@@ -77,6 +78,7 @@ public class ReviewController {
         }
     }
 
+    // DELETE /api/reviews/{id} — admin moderation
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long id) {
         try {

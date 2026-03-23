@@ -17,21 +17,21 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // POST  create customer profile (US-CUST-001)
+    // POST /api/customers — create customer profile (US-CUST-001)
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         Customer created = customerService.createCustomer(customer);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    // get all customers
+    // GET /api/customers — get all customers
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    //  get customer by ID
+    // GET /api/customers/{id} — get customer by ID
     @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
         Optional<Customer> customer = customerService.getCustomerById(id);
@@ -39,7 +39,7 @@ public class CustomerController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // get customer by email
+    // GET /api/customers/email/{email} — get customer by email
     @GetMapping("/email/{email}")
     public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
         Customer customer = customerService.getCustomerByEmail(email);
@@ -48,7 +48,7 @@ public class CustomerController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //  update customer profile (US-CUST-001)
+    // PUT /api/customers/{id} — update customer profile (US-CUST-001)
     @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id,
                                                     @RequestBody Customer customerDetails) {
@@ -64,7 +64,7 @@ public class CustomerController {
         }
     }
 
-    // DELETE 
+    // DELETE /api/customers/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);

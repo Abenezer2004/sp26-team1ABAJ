@@ -20,20 +20,22 @@ public class ListingService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    
+    // GET all listings
     public List<Listing> getAllListings() {
         return listingRepository.findAll();
     }
 
+    // GET listing by ID
     public Optional<Listing> getListingById(Long id) {
         return listingRepository.findById(id);
     }
 
-    
+    // GET listings by customer
     public List<Listing> getListingsByCustomerId(Long customerId) {
         return listingRepository.findByCustomer_UserId(customerId);
     }
 
+    // GET open listings — no filters (US-PROV-002)
     public List<Listing> getOpenListings() {
         return listingRepository.findByStatus(ListingStatus.OPEN);
     }

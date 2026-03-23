@@ -21,13 +21,14 @@ public class Listing {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    @JsonIgnoreProperties({"listings", "appointments"})
+    @JsonIgnoreProperties("listings")
     private Customer customer;
 
     @Column(nullable = false)
     private String specialtyNeeded;
 
     private String languageRequired;
+
     private LocalDate startDate;
     private Integer durationDays;
     private Double hourlyBudget;

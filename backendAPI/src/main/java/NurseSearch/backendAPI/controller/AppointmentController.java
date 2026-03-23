@@ -35,14 +35,14 @@ public class AppointmentController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // GET view all bookings for a customer (US-CUST-005)
+    // GET /api/appointments/customer/{customerId} — view all bookings (US-CUST-005)
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<Appointment>> getByCustomer(@PathVariable Long customerId) {
         List<Appointment> appointments = appointmentService.getAppointmentsByCustomer(customerId);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
-    // GET — filter by status (US-CUST-005)
+    // GET /api/appointments/customer/{customerId}/status/{status} — filter by status (US-CUST-005)
     @GetMapping("/customer/{customerId}/status/{status}")
     public ResponseEntity<List<Appointment>> getByCustomerAndStatus(@PathVariable Long customerId,
                                                                      @PathVariable String status) {
@@ -55,14 +55,14 @@ public class AppointmentController {
         }
     }
 
-    // GET view all bookings for a nurse (US-PROV-003)
+    // GET /api/appointments/nurse/{nurseId}
     @GetMapping("/nurse/{nurseId}")
     public ResponseEntity<List<Appointment>> getByNurse(@PathVariable Long nurseId) {
         List<Appointment> appointments = appointmentService.getAppointmentsByNurse(nurseId);
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
-    // POST customer requests a booking (US-CUST-004)
+    // POST /api/appointments — customer requests a booking (US-CUST-004)
     @PostMapping
     public ResponseEntity<Appointment> createAppointment(@RequestBody Map<String, Object> body) {
         try {
@@ -81,7 +81,7 @@ public class AppointmentController {
         }
     }
 
-    // PUT customer cancels (US-CUST-008)
+    // PUT /api/appointments/{id}/cancel — customer cancels (US-CUST-008)
     @PutMapping("/{id}/cancel")
     public ResponseEntity<Appointment> cancelAppointment(@PathVariable Long id) {
         try {
@@ -92,7 +92,7 @@ public class AppointmentController {
         }
     }
 
-    // PUT update status (used by nurse: confirm/complete/decline)
+    // PUT /api/appointments/{id}/status — update status (used by nurse: confirm/complete/decline)
     @PutMapping("/{id}/status")
     public ResponseEntity<Appointment> updateStatus(@PathVariable Long id,
                                                      @RequestBody Map<String, String> body) {
@@ -107,7 +107,7 @@ public class AppointmentController {
         }
     }
 
-    // DELETE 
+    // DELETE /api/appointments/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointment(id);
