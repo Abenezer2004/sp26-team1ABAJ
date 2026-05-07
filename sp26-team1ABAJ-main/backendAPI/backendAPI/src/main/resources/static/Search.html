@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search - Nurse Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../customer-prototype/styles.css">
+
+    <style>
+        .tab-toggle {
+            display: flex;
+            gap: 12px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .results-section {
+            margin-top: 24px;
+        }
+
+        .customer-card,
+        .nurse-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nurse-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nurse-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .nurse-meta {
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .nurse-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container navbar-content">
+        <div class="logo">Nurse Search</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Search.html" class="active">Search</a></li>
+            <li><a href="provider_profile.html">Profile</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Search</h1>
+
+    <div class="tab-toggle">
+        <button type="button" id="customersTabBtn" class="btn btn-primary" onclick="showTab('customers')">
+            Find Customers
+        </button>
+        <button type="button" id="nursesTabBtn" class="btn btn-secondary" onclick="showTab('nurses')">
+            Find Nurses
+        </button>
+    </div>
+
+    <div id="customersTab">
+        <div class="filter-section">
+            <h2>Filter Customers</h2>
+
+            <label for="careType">Type of Care Needed</label>
+            <select id="careType">
+                <option value="">Select</option>
+                <option value="Elderly Care">Elderly Care</option>
+                <option value="Pediatric Care">Pediatric Care</option>
+                <option value="Post-Surgery Care">Post-Surgery Care</option>
+                <option value="General Checkup">General Checkup</option>
+            </select>
+
+            <label for="availability">Availability Needed</label>
+            <select id="availability">
+                <option value="">Select</option>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Weekend">Weekend</option>
+            </select>
+
+            <label for="distance">Distance</label>
+            <select id="distance">
+                <option value="">Select</option>
+                <option value="0 - 10 miles">0 - 10 miles</option>
+                <option value="10 - 30 miles">10 - 30 miles</option>
+                <option value="30+ miles">30+ miles</option>
+            </select>
+
+            <button type="button" id="applyCustomerFiltersBtn" class="btn btn-primary">Apply Filters</button>
+        </div>
+
+        <div class="results-section">
+            <h2>Customer List</h2>
+            <div id="customerResults"></div>
+        </div>
+    </div>
+
+    <div id="nursesTab" class="hidden">
+        <div class="filter-section">
+            <h2>Filter Nurses</h2>
+
+            <label for="nurseSpecialty">Specialty</label>
+            <input type="text" id="nurseSpecialty" placeholder="Ex: Post-Surgery Care">
+
+            <label for="nurseCity">City</label>
+            <input type="text" id="nurseCity" placeholder="Ex: Greensboro">
+
+            <label for="nurseLanguage">Language</label>
+            <input type="text" id="nurseLanguage" placeholder="Ex: English">
+
+            <label for="nurseMaxRate">Maximum Hourly Rate</label>
+            <input type="number" id="nurseMaxRate" placeholder="Ex: 40">
+
+            <button type="button" id="applyNurseFiltersBtn" class="btn btn-primary">Apply Filters</button>
+        </div>
+
+        <div class="results-section">
+            <h2>Active Nurse List</h2>
+            <div id="nurseResults"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const sampleCustomers = [
+    {
+        name: "John Smith",
+        careType: "Elderly Care",
+        availability: "Morning",
+        distance: "3 miles away"
+    },
+    {
+        name: "Sarah Johnson",
+        careType: "Pediatric Care",
+        availability: "Afternoon",
+        distance: "8 miles away"
+    },
+    {
+        name: "Michael Davis",
+        careType: "Post-Surgery Care",
+        availability: "Evening",
+        distance: "12 miles away"
+    }
+];
+
+let allNurses = [];
+let activeNurses = [];
+
+function showTab(tabName) {
+    const customersTab = document.getElementById("customersTab");
+    const nursesTab = document.getElementById("nursesTab");
+    const customersBtn = document.getElementById("customersTabBtn");
+    const nursesBtn = document.getElementById("nursesTabBtn");
+
+    if (tabName === "customers") {
+        customersTab.classList.remove("hidden");
+        nursesTab.classList.add("hidden");
+        customersBtn.className = "btn btn-primary";
+        nursesBtn.className = "btn btn-secondary";
+    } else {
+        nursesTab.classList.remove("hidden");
+        customersTab.classList.add("hidden");
+        nursesBtn.className = "btn btn-primary";
+        customersBtn.className = "btn btn-secondary";
+    }
+}
+
+function renderCustomers(customers) {
+    const results = document.getElementById("customerResults");
+    results.innerHTML = "";
+
+    if (customers.length === 0) {
+        results.innerHTML = "<p>No customers match the selected filters.</p>";
+        return;
+    }
+
+    customers.forEach(customer => {
+        const card = document.createElement("div");
+        card.className = "customer-card";
+        card.innerHTML = `
+            <strong>${customer.name}</strong><br>
+            Care Needed: ${customer.careType}<br>
+            Availability: ${customer.availability}<br>
+            Location: ${customer.distance}
+        `;
+        results.appendChild(card);
+    });
+}
+
+function applyCustomerFilters() {
+    const careType = document.getElementById("careType").value;
+    const availability = document.getElementById("availability").value;
+    const distance = document.getElementById("distance").value;
+
+    const filtered = sampleCustomers.filter(customer => {
+        const matchesCareType = !careType || customer.careType === careType;
+        const matchesAvailability = !availability || customer.availability === availability;
+
+        let matchesDistance = true;
+        if (distance === "0 - 10 miles") {
+            matchesDistance = customer.distance.includes("3 miles") || customer.distance.includes("8 miles");
+        } else if (distance === "10 - 30 miles") {
+            matchesDistance = customer.distance.includes("12 miles");
+        } else if (distance === "30+ miles") {
+            matchesDistance = false;
+        }
+
+        return matchesCareType && matchesAvailability && matchesDistance;
+    });
+
+    renderCustomers(filtered);
+}
+
+function renderNurses(nurses) {
+    const results = document.getElementById("nurseResults");
+    results.innerHTML = "";
+
+    if (nurses.length === 0) {
+        results.innerHTML = "<p>No active nurses match the selected filters.</p>";
+        return;
+    }
+
+    nurses.forEach(nurse => {
+        const fullName = `${nurse.firstName || ""} ${nurse.lastName || ""}`.trim() || "Unnamed Nurse";
+        const specialty = nurse.specialty || "Specialty not listed";
+        const city = nurse.city || "City not listed";
+        const rate = nurse.hourlyRate != null ? `$${nurse.hourlyRate}/hour` : "Rate not listed";
+        const experience = nurse.experienceLevel || "Experience not listed";
+        const language = nurse.languagesSpoken || "Languages not listed";
+
+        const card = document.createElement("div");
+        card.className = "nurse-card";
+        card.innerHTML = `
+            <div class="nurse-card-top">
+                <div>
+                    <div class="nurse-name">${fullName}</div>
+                    <div class="nurse-meta">${specialty}</div>
+                    <div>City: ${city}</div>
+                    <div>Experience: ${experience}</div>
+                    <div>Languages: ${language}</div>
+                    <div>Status: ${nurse.status || "Unknown"}</div>
+                </div>
+                <div style="font-weight:700; font-size:18px;">${rate}</div>
+            </div>
+
+            <div class="nurse-actions">
+                <a class="btn btn-primary" href="nurse.html?id=${nurse.userId}">View Profile</a>
+            </div>
+        `;
+        results.appendChild(card);
+    });
+}
+
+async function loadAllNurses() {
+    const results = document.getElementById("nurseResults");
+    results.innerHTML = "<p>Loading active nurses...</p>";
+
+    try {
+        const response = await fetch("/api/nurses");
+
+        if (!response.ok) {
+            throw new Error("Failed to load nurses");
+        }
+
+        allNurses = await response.json();
+        activeNurses = allNurses.filter(nurse => nurse.status === "ACTIVE");
+        renderNurses(activeNurses);
+    } catch (error) {
+        console.error(error);
+        results.innerHTML = "<p>Could not load nurses from the server.</p>";
+    }
+}
+
+function applyNurseFilters() {
+    const specialty = document.getElementById("nurseSpecialty").value.trim().toLowerCase();
+    const city = document.getElementById("nurseCity").value.trim().toLowerCase();
+    const language = document.getElementById("nurseLanguage").value.trim().toLowerCase();
+    const maxRateValue = document.getElementById("nurseMaxRate").value.trim();
+    const maxRate = maxRateValue ? parseFloat(maxRateValue) : null;
+
+    const filtered = activeNurses.filter(nurse => {
+        const nurseSpecialty = (nurse.specialty || "").toLowerCase();
+        const nurseCity = (nurse.city || "").toLowerCase();
+        const nurseLanguages = (nurse.languagesSpoken || "").toLowerCase();
+        const nurseRate = nurse.hourlyRate;
+
+        const matchesSpecialty = !specialty || nurseSpecialty.includes(specialty);
+        const matchesCity = !city || nurseCity.includes(city);
+        const matchesLanguage = !language || nurseLanguages.includes(language);
+        const matchesRate = maxRate == null || (nurseRate != null && nurseRate <= maxRate);
+
+        return matchesSpecialty && matchesCity && matchesLanguage && matchesRate;
+    });
+
+    renderNurses(filtered);
+}
+
+document.getElementById("applyCustomerFiltersBtn").addEventListener("click", applyCustomerFilters);
+document.getElementById("applyNurseFiltersBtn").addEventListener("click", applyNurseFilters);
+
+renderCustomers(sampleCustomers);
+loadAllNurses();
+</script>
+
+</body>
+</html>

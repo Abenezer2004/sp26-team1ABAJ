@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Provider Account Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container navbar-content">
+        <div class="logo">Nurse Search</div>
+        <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="Search.html">Find Customers</a></li>
+            <li><a href="login.html">Profile</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Provider Account Creation</h1>
+
+    <form id="nurseRegisterForm">
+        <h2>Basic Account Information</h2>
+
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" required>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" required>
+
+        <h2>Nursing Profile</h2>
+
+        <label for="specialty">Specialty</label>
+        <input type="text" id="specialty" placeholder="Ex: Post-Surgery Care">
+
+        <label for="experienceLevel">Years of Experience</label>
+        <input type="text" id="experienceLevel" placeholder="Ex: 5 years">
+
+        <label for="hourlyRate">Houfsdesrly Rate</label>
+        <input type="number" id="hourlyRate" step="0.01" placeholder="Ex: 35">
+
+        <label for="licenseNumber">Nursing License Number</label>
+        <input type="text" id="licenseNumber">
+
+        <label for="bio">Professional History</label>
+        <textarea id="bio" rows="4" placeholder="Describe your experience, certifications, and care background"></textarea>
+
+        <label for="city">City</label>
+        <input type="text" id="city">
+
+        <label for="zipCode">Zip Code</label>
+        <input type="text" id="zipCode">
+
+        <label for="languagesSpoken">Languages Spoken</label>
+        <input type="text" id="languagesSpoken" placeholder="Ex: English, Spanish">
+
+        <h2>Internship Availability</h2>
+
+        <label for="internshipAvailable">Are internships available?</label>
+        <select id="internshipAvailable">
+            <option value="">Select Option</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <h2>Hours of Operation</h2>
+
+        <label for="monday">Monday</label>
+        <input type="text" id="monday" placeholder="Ex: 9 AM - 5 PM">
+
+        <label for="tuesday">Tuesday</label>
+        <input type="text" id="tuesday">
+
+        <label for="wednesday">Wednesday</label>
+        <input type="text" id="wednesday">
+
+        <label for="thursday">Thursday</label>
+        <input type="text" id="thursday">
+
+        <label for="friday">Friday</label>
+        <input type="text" id="friday">
+
+        <label for="saturday">Saturday</label>
+        <input type="text" id="saturday">
+
+        <label for="sunday">Sunday</label>
+        <input type="text" id="sunday">
+
+        <button type="submit">Create Nurse Account</button>
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<script>
+document.getElementById("nurseRegisterForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const hoursOfOperation = `
+Monday: ${document.getElementById("monday").value}
+Tuesday: ${document.getElementById("tuesday").value}
+Wednesday: ${document.getElementById("wednesday").value}
+Thursday: ${document.getElementById("thursday").value}
+Friday: ${document.getElementById("friday").value}
+Saturday: ${document.getElementById("saturday").value}
+Sunday: ${document.getElementById("sunday").value}
+    `.trim();
+
+    const payload = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        phone: document.getElementById("phone").value,
+        specialty: document.getElementById("specialty").value,
+        experienceLevel: document.getElementById("experienceLevel").value,
+        hourlyRate: document.getElementById("hourlyRate").value
+            ? parseFloat(document.getElementById("hourlyRate").value)
+            : null,
+        bio: document.getElementById("bio").value,
+        licenseNumber: document.getElementById("licenseNumber").value,
+        city: document.getElementById("city").value,
+        zipCode: document.getElementById("zipCode").value,
+        languagesSpoken: document.getElementById("languagesSpoken").value,
+        internshipAvailable: document.getElementById("internshipAvailable").value === ""
+            ? null
+            : document.getElementById("internshipAvailable").value === "true",
+        hoursOfOperation: hoursOfOperation
+    };
+
+    const messageEl = document.getElementById("message");
+    messageEl.textContent = "Creating account...";
+
+    try {
+        const response = await fetch("/api/nurses/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        let data = null;
+        try {
+            data = await response.json();
+        } catch {}
+
+        if (!response.ok) {
+            messageEl.textContent = data || "Error creating account.";
+            return;
+        }
+
+        messageEl.textContent = "Account created successfully. You can now log in.";
+        document.getElementById("nurseRegisterForm").reset();
+    } catch (error) {
+        console.error(error);
+        messageEl.textContent = "Could not connect to server.";
+    }
+});
+</script>
+
+</body>
+</html>
