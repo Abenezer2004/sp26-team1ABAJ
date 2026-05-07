@@ -1,0 +1,83 @@
+package NurseSearch.backendAPI.service;
+
+import NurseSearch.backendAPI.entity.Customer;
+import NurseSearch.backendAPI.entity.Listing;
+import NurseSearch.backendAPI.entity.Listing.ListingStatus;
+import NurseSearch.backendAPI.repository.CustomerRepository;
+import NurseSearch.backendAPI.repository.ListingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class ListingService {
+
+    @Autowired
+    private ListingRepository listingRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    public List<Listing> getAllListings() {
+        return listingRepository.findAll();
+    }
+
+    public Optional<Listing> getListingById(Long id) {
+        return listingRepository.findById(id);
+    }
+
+    public List<Listing> getListingsByCustomerId(Long customerId) {
+        return listingRepository.findByCustomer_UserId(customerId);
+    }
+
+    public List<Listing> getOpenListings() {
+        return listingRepository.findByStatus(ListingStatus.OPEN);
+    }
+
+    public List<Listing> filterOpenListings(String specialty, Double maxBudget) {
+        return listingRepository.findByStatus(ListingStatus.OPEN).stream()
+            .filter(l -> {
+                if (specialty != null && !specialty.isBlank()) {
+                    if (l.getSpecialtyNeeded() == null) return false;
+                    if (!l.getSpecialtyNeeded().toLowerCase().contains(specialty.toLowerCase())) return false;
+                }
+                if (maxBudget != null) {
+                    if (l.getHourlyBudget() == null) return false;
+                    if (l.getHourlyBudget() > maxBudget) return false;
+                }
+                return true;
+            })
+            .collect(Collectors.toList());
+    }
+
+    public List<Listing> getListingsBySpecialty(String specialty) {
+        return listingRepository.findBySpecialtyNeededIgnoreCase(specialty);
+    }
+
+    public Listing createListing(Long customerId, Listing listing) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
+        listing.setCustomer(customer);
+        if (listing.getStatus() == null) listing.setStatus(ListingStatus.OPEN);
+        return listingRepository.save(listing);
+    }
+
+    public Listing updateListing(Long id, Listing listingDetails) {
+        return listingRepository.findById(id).map(listing -> {
+            if (listingDetails.getSpecialtyNeeded() != null) listing.setSpecialtyNeeded(listingDetails.getSpecialtyNeeded());
+            if (listingDetails.getLanguageRequired() != null) listing.setLanguageRequired(listingDetails.getLanguageRequired());
+            if (listingDetails.getStartDate() != null) listing.setStartDate(listingDetails.getStartDate());
+            if (listingDetails.getDurationDays() != null) listing.setDurationDays(listingDetails.getDurationDays());
+            if (listingDetails.getHourlyBudget() != null) listing.setHourlyBudget(listingDetails.getHourlyBudget());
+            if (listingDetails.getAdditionalRequirements() != null) listing.setAdditionalRequirements(listingDetails.getAdditionalRequirements());
+            if (listingDetails.getStatus() != null) listing.setStatus(listingDetails.getStatus());
+            return listingRepository.save(listing);
+        }).orElseThrow(() -> new RuntimeException("Listing not found with id: " + id));
+    }
+
+    public void deleteListing(Long id) {
+        listingRepository.deleteById(id);
+    }
+}

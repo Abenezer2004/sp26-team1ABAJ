@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nurse Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Login</h1>
+
+    <form id="loginForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const payload = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    const messageEl = document.getElementById("message");
+    messageEl.textContent = "Logging in...";
+
+    try {
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        let data;
+        try {
+            data = await response.json();
+        } catch {
+            data = null;
+        }
+
+        if (!response.ok) {
+            messageEl.textContent = "Login failed: " + (data?.message || "Invalid credentials");
+            return;
+        }
+
+        localStorage.setItem("loggedInUserId", data.userId);
+        localStorage.setItem("loggedInUserEmail", data.email);
+
+        messageEl.textContent = "Login successful.";
+        window.location.href = "/provider_profiler_update.html";
+    } catch (error) {
+        console.error(error);
+        messageEl.textContent = "Could not connect to server.";
+    }
+});
+</script>
+
+</body>
+</html>

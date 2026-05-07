@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Provider Profile - Nurse Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-content">
+    <div class="logo">Nurse Search</div>
+    <ul class="nav-links">
+      <li><a href="Search.html">Search</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="provider_profiler_update.html" class="active">Profile</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="max-width:900px; margin:32px auto;">
+  <h1 style="margin-bottom:32px;">My Provider Profile</h1>
+
+  <div style="display:grid; gap:24px;">
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <h2 style="margin:0;">Personal Information</h2>
+        <button class="btn btn-secondary btn-small" onclick="toggleEdit('personal')">Edit</button>
+      </div>
+
+      <form id="personalForm">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" disabled>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" disabled>
+        </div>
+
+        <div id="personalButtons" style="display:none; gap:12px; margin-top:16px;">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" onclick="cancelEdit('personal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <h2 style="margin:0;">Professional Details</h2>
+        <button class="btn btn-secondary btn-small" onclick="toggleEdit('professional')">Edit</button>
+      </div>
+
+      <form id="professionalForm">
+
+        <div class="form-group">
+          <label for="licenseNumber">License Number</label>
+          <input type="text" id="licenseNumber" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="specialty">Specialty</label>
+          <input type="text" id="specialty" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="experienceLevel">Years / Experience Level</label>
+          <input type="text" id="experienceLevel" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="hourlyRate">Hourly Rate ($)</label>
+          <input type="number" id="hourlyRate" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="zipCode">Zip Code</label>
+          <input type="text" id="zipCode" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="languagesSpoken">Languages Spoken</label>
+          <input type="text" id="languagesSpoken" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="internshipAvailable">Internship Available</label>
+          <input type="text" id="internshipAvailable" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Professional Bio</label>
+          <textarea id="bio" rows="4" disabled></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="hoursOfOperation">Hours of Operation</label>
+          <textarea id="hoursOfOperation" rows="6" disabled></textarea>
+        </div>
+
+        <div id="professionalButtons" style="display:none; gap:12px; margin-top:16px;">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" onclick="cancelEdit('professional')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+let originalData = {};
+
+function toggleEdit(section) {
+  const form = document.getElementById(section + "Form");
+  const inputs = form.querySelectorAll("input, textarea");
+  const buttons = document.getElementById(section + "Buttons");
+
+  inputs.forEach(input => {
+    input.disabled = !input.disabled;
+  });
+
+  buttons.style.display = buttons.style.display === "none" ? "flex" : "none";
+}
+
+function cancelEdit(section) {
+  loadFields(originalData);
+  toggleEdit(section);
+}
+
+function loadFields(nurse) {
+  document.getElementById("firstName").value = nurse.firstName || "";
+  document.getElementById("lastName").value = nurse.lastName || "";
+  document.getElementById("email").value = nurse.email || "";
+  document.getElementById("phone").value = nurse.phone || "";
+  document.getElementById("licenseNumber").value = nurse.licenseNumber || "";
+  document.getElementById("specialty").value = nurse.specialty || "";
+  document.getElementById("experienceLevel").value = nurse.experienceLevel || "";
+  document.getElementById("hourlyRate").value = nurse.hourlyRate ?? "";
+  document.getElementById("city").value = nurse.city || "";
+  document.getElementById("zipCode").value = nurse.zipCode || "";
+  document.getElementById("languagesSpoken").value = nurse.languagesSpoken || "";
+  document.getElementById("internshipAvailable").value =
+    nurse.internshipAvailable === true ? "Yes" :
+    nurse.internshipAvailable === false ? "No" : "";
+  document.getElementById("bio").value = nurse.bio || "";
+  document.getElementById("hoursOfOperation").value = nurse.hoursOfOperation || "";
+}
+
+async function loadProfile() {
+  const userId = localStorage.getItem("loggedInUserId");
+
+  if (!userId) {
+    alert("No logged in user found.");
+    window.location.href = "/login.html";
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/nurses/${userId}`);
+    if (!response.ok) {
+      throw new Error("Failed to load profile");
+    }
+
+    const nurse = await response.json();
+    originalData = nurse;
+    loadFields(nurse);
+  } catch (error) {
+    console.error(error);
+    alert("Could not load profile.");
+  }
+}
+
+async function updateNurse() {
+  const userId = localStorage.getItem("loggedInUserId");
+
+  const payload = {
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    licenseNumber: document.getElementById("licenseNumber").value,
+    specialty: document.getElementById("specialty").value,
+    experienceLevel: document.getElementById("experienceLevel").value,
+    hourlyRate: document.getElementById("hourlyRate").value
+      ? parseFloat(document.getElementById("hourlyRate").value)
+      : null,
+    city: document.getElementById("city").value,
+    zipCode: document.getElementById("zipCode").value,
+    languagesSpoken: document.getElementById("languagesSpoken").value,
+    internshipAvailable:
+      document.getElementById("internshipAvailable").value === "Yes"
+        ? true
+        : document.getElementById("internshipAvailable").value === "No"
+        ? false
+        : null,
+    bio: document.getElementById("bio").value,
+    hoursOfOperation: document.getElementById("hoursOfOperation").value
+  };
+
+  try {
+    const response = await fetch(`/api/nurses/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("Update failed");
+    }
+
+    const updated = await response.json();
+    originalData = updated;
+    loadFields(updated);
+
+    alert("Profile updated successfully");
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to update profile");
+  }
+}
+
+// 🔥 PERSONAL SAVE
+document.getElementById("personalForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  await updateNurse();
+  toggleEdit("personal");
+});
+
+// 🔥 PROFESSIONAL SAVE
+document.getElementById("professionalForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  await updateNurse();
+  toggleEdit("professional");
+});
+
+loadProfile();
+</script>
+</body>
+</html>

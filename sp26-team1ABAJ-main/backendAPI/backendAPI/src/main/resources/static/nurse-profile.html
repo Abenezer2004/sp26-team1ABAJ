@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nurse Profile</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    @media (max-width: 968px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .review-card {
+      background: var(--gray-100);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">
+        Nurse Search
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Find Nurses</a></li>
+        <li><a href="dashboard.html">My Bookings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="search.html" style="display: inline-flex; align-items: center; gap: 8px; margin: 24px 0; color: var(--gray-600);">
+      Back to Search
+    </a>
+
+    <div class="profile-layout">
+      <main>
+        <div class="card">
+          <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
+            <div class="nurse-avatar" id="avatar" style="width: 100px; height: 100px; font-size: 40px;">--</div>
+            <div style="flex: 1;">
+              <h1 id="fullName" style="margin-bottom: 8px;">Loading...</h1>
+              <p id="specialty" style="font-size: 18px; color: var(--gray-600); margin-bottom: 16px;"></p>
+
+              <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="rating">
+                  <span id="ratingText" style="font-weight: 600;">No reviews yet</span>
+                </div>
+                <span class="badge badge-success">Verified</span>
+                <span class="badge badge-info">Available</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; padding: 24px; background: var(--gray-100); border-radius: var(--radius-md);">
+            <div>
+              <div id="experienceValue" style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">--</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Experience</div>
+            </div>
+            <div>
+              <div id="appointmentsValue" style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">--</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Appointments</div>
+            </div>
+            <div>
+              <div id="responseRateValue" style="font-size: 24px; font-weight: 700; color: var(--primary-blue);">100%</div>
+              <div style="color: var(--gray-600); font-size: 14px;">Response Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>About</h2>
+          <p id="bio">No bio available.</p>
+        </div>
+
+        <div class="card">
+          <h2>Specialties & Skills</h2>
+          <div class="nurse-tags" id="specialtiesContainer">
+            <span class="tag">No specialty listed</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Languages</h2>
+          <div id="languagesContainer" style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <span class="badge badge-info">Not listed</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Certifications & Education</h2>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--gray-200);">
+              <div style="font-weight: 600;">Registered Nurse (RN)</div>
+              <div id="licenseNumber" style="color: var(--gray-600); font-size: 14px;">License not listed</div>
+            </li>
+
+            <li style="padding: 12px 0;">
+              <div style="font-weight: 600;">Service Area</div>
+              <div id="locationText" style="color: var(--gray-600); font-size: 14px;">Location not listed</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 id="reviewsHeading">Patient Reviews</h2>
+          <p style="color: var(--gray-600); margin-bottom: 16px;">
+            Review support can be connected later.
+          </p>
+
+          <button class="btn btn-secondary btn-full">View All Reviews</button>
+        </div>
+      </main>
+
+      <aside>
+        <div class="card" style="position: sticky; top: 90px;">
+          <div class="nurse-rate" id="hourlyRateText" style="text-align: center; margin-bottom: 24px;">
+            Rate not listed
+          </div>
+
+          <button class="btn btn-primary btn-full btn-large">
+            Book Appointment
+          </button>
+
+          <div style="margin: 24px 0; text-align: center; color: var(--gray-400);">
+            <span>───── or ─────</span>
+          </div>
+
+          <button class="btn btn-secondary btn-full">
+            Send Message
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function makeInitials(firstName, lastName) {
+      const first = firstName ? firstName.charAt(0).toUpperCase() : "";
+      const last = lastName ? lastName.charAt(0).toUpperCase() : "";
+      return (first + last) || "--";
+    }
+
+    function parseLanguages(languagesSpoken) {
+      if (!languagesSpoken) return [];
+      return languagesSpoken
+        .split(",")
+        .map(lang => lang.trim())
+        .filter(lang => lang.length > 0);
+    }
+
+    function renderLanguages(languages) {
+      const container = document.getElementById("languagesContainer");
+      container.innerHTML = "";
+
+      if (languages.length === 0) {
+        container.innerHTML = `<span class="badge badge-info">Not listed</span>`;
+        return;
+      }
+
+      languages.forEach(language => {
+        const span = document.createElement("span");
+        span.className = "badge badge-info";
+        span.textContent = language;
+        container.appendChild(span);
+      });
+    }
+
+    function renderSpecialties(nurse) {
+      const container = document.getElementById("specialtiesContainer");
+      container.innerHTML = "";
+
+      const specialties = [];
+
+      if (nurse.specialty) specialties.push(nurse.specialty);
+      if (nurse.experienceLevel) specialties.push(nurse.experienceLevel);
+
+      if (specialties.length === 0) {
+        container.innerHTML = `<span class="tag">No specialty listed</span>`;
+        return;
+      }
+
+      specialties.forEach(item => {
+        const span = document.createElement("span");
+        span.className = "tag";
+        span.textContent = item;
+        container.appendChild(span);
+      });
+    }
+
+    function renderProfile(nurse) {
+      const fullName = `${nurse.firstName || ""} ${nurse.lastName || ""}`.trim();
+
+      document.getElementById("avatar").textContent = makeInitials(nurse.firstName, nurse.lastName);
+      document.getElementById("fullName").textContent = fullName || "Unnamed Nurse";
+      document.getElementById("specialty").textContent = nurse.specialty || "Specialty not listed";
+
+      const averageRating = nurse.averageRating ?? 0.0;
+      const reviewCount = nurse.reviewCount ?? 0;
+      document.getElementById("ratingText").textContent =
+        reviewCount > 0
+          ? `${averageRating} (${reviewCount} reviews)`
+          : "No reviews yet";
+
+      document.getElementById("experienceValue").textContent = nurse.experienceLevel || "Not listed";
+      document.getElementById("appointmentsValue").textContent = "30+";
+      document.getElementById("responseRateValue").textContent = "100%";
+
+      document.getElementById("bio").textContent = nurse.bio || "No bio available.";
+      document.getElementById("licenseNumber").textContent =
+        nurse.licenseNumber || "License not listed";
+
+      const city = nurse.city || "";
+      const zip = nurse.zipCode || "";
+      const locationText = [city, zip].filter(Boolean).join(", ");
+      document.getElementById("locationText").textContent =
+        locationText || "Location not listed";
+
+      document.getElementById("hourlyRateText").textContent =
+        nurse.hourlyRate != null ? `$${nurse.hourlyRate}/hour` : "Rate not listed";
+
+      document.getElementById("reviewsHeading").textContent =
+        `Patient Reviews (${reviewCount})`;
+
+      renderSpecialties(nurse);
+      renderLanguages(parseLanguages(nurse.languagesSpoken));
+    }
+
+    async function loadNurseProfile() {
+      const nurseId = getQueryParam("id");
+
+      if (!nurseId) {
+        alert("No nurse id was provided in the URL.");
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/nurses/${nurseId}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to load nurse profile");
+        }
+
+        const nurse = await response.json();
+        renderProfile(nurse);
+      } catch (error) {
+        console.error(error);
+        alert("Could not load nurse profile.");
+      }
+    }
+
+    loadNurseProfile();
+  </script>
+</body>
+</html>
