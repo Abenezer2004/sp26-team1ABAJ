@@ -1,9 +1,9 @@
 # Nurse Search - Backend API Documentation
 
 **Version:** 1.0
-**Team*:** Abenezer Shiferaw & Allen Holthz
+**Team*:** Abenezer Shiferaw & Allan Holtz
 **Class:** CSC 340 
-**Last Updated:** March 20, 2026
+**Last Updated:** May 7th, 2026
 **Base URL:** `http://localhost:8080/api`
 
 ---
@@ -141,7 +141,7 @@ The API supports two primary user roles:
 
 
 ### Nurse Management
-*Implemented by: Allen Holtz*
+*Implemented by: Allan Holtz*
 
 #### Create Nurse
 **Endpoint:** `POST /api/nurses`
